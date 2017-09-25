@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/font-awesome.min.css">  
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">-->
+    <link rel="stylesheet" href="../assets/css/styles.css">
+  </head>
+  <body>
+    
+      <!-- navigation -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="index.html">YUMMY RECIPE APP</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="dashboard.html">
+                <i class="fa fa-home"></i>DASHBOARD 
+                <span class="sr-only">(current)
+                </span></a>
+            </li>
+          </ul>
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <i class="fa fa-user"></i> PROFILE</a>
+            </li>            
+          </ul>
+        </div>
+      </nav>
+      <!-- End Navigation -->
+
+      <!-- content -->
+      <div class="container dashboard">
+        <div class="row">
+          <p style="padding: 0.2em;"></p>
+          <div class="col-12">
+             <h2>MY PROFILE</h2>
+             <img src="../assets/img/thumb.png" style="border-radius:50%; width:120px;" alt=""> 
+             <h2>WALUKAGGA</h2>
+             <h3>PATRICK</h3>
+            <hr/>
+          </div>
+        </div>
+
+        <div class="row">
+            <div class="col-4">
+                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist">
+                    <a class="nav-link active" id="v-pills-account-tab" data-toggle="pill" href="#v-pills-account" role="tab" aria-controls="v-pills-account" aria-expanded="true">
+                        ACCOUNT DETAILS
+                    </a>
+                    <a class="nav-link" id="v-pills-recipe-tab" data-toggle="pill" href="#v-pills-recipe" role="tab" aria-controls="v-pills-recipe" aria-expanded="true">
+                        MY RECIPES
+                    </a>
+                    <a class="nav-link" id="v-pills-category-tab" data-toggle="pill" href="#v-pills-category" role="tab" aria-controls="v-pills-category" aria-expanded="true">
+                        ADD RECIPE CATEGORY
+                    </a>
+                    <a class="nav-link" id="v-pills-recipe_add-tab" data-toggle="pill" href="#v-pills-recipe_add" role="tab" aria-controls="v-pills-recipe_add" aria-expanded="true">
+                        ADD RECIPES
+                    </a><br><hr>
+                    <a href="#" class="btn btn-info">SIGN OUT</a>
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="tab-content" id="v-pills-tabContent">
+                    <div class="tab-pane fade show active" id="v-pills-account" role="tabpanel" aria-labelledby="v-pills-account-tab">
+
+                            <h4>PERSONAL INFO</h4>
+                            <hr>
+                            <form>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                    <label for="firstName" class="col-form-label">First Name</label>
+                                    <input type="text" class="form-control" id="firstname" value="PATRICK" disabled>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                    <label for="lastname" class="col-form-label">Last Name</label>
+                                    <input type="text" class="form-control" id="lastname" value="WALUKAGGA" disabled>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email" class="col-form-label">Email</label>
+                                    <input type="email" class="form-control" id="email" value="pwalukagga@gmail.com" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password" class="col-form-label">Password</label>
+                                    <input type="password" class="form-control" id="password" value="pato123" disabled>
+                                </div>
+                                
+                                <a href="#" class="btn btn-primary">Update Personal Information</a>
+                            </form>
+
+                    </div>
+                    <div class="tab-pane fade" id="v-pills-recipe" role="tabpanel" aria-labelledby="v-pills-recipe-tab">
+
+                        <h4>RECIPES</h4>
+                        <hr>
+                        <div class="alert alert-warning">
+                            You do not have any recipes added yet!
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="v-pills-category" role="tabpanel" aria-labelledby="v-pills-category-tab">
+
+                        <h4>RECIPE CATEGORY</h4>
+                        <hr>
+                        <form>
+                            <div class="form-group">
+                                <label for="category_name">Name</label>
+                                <input type="text" class="form-control" id="category_name" placeholder="Recipe Category">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="description">Description</label>
+                                <textarea class="form-control" id="description" rows="3"></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Create</button>
+                        </form>
+
+                    </div>
+                    <div class="tab-pane fade" id="v-pills-recipe_add" role="tabpanel" aria-labelledby="v-pills-recipe_add-tab">
+                        <h4>RECIPES IN CATEGORIES</h4>
+                        <hr>
+                        <div class="alert alert-warning">
+                            You do not have any recipe categories added yet!
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>  
+
+      </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+  </body>
+</html>

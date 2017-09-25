@@ -1,0 +1,15 @@
+body {
+    /*
+    background-image: url('../img/recipe.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    filter: grayscale(70%); */
+}
+
+.dashboard {
+    background-image: url('../img/restaurant_icons.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed
+}
