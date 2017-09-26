@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <div class="row">
+        <p style="padding: 1em;"></p>
+        <div class="col-12">
+        <h2>YUMMY RECIPE APP</h2>
+        <hr/>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+        <p>
+            Whether you love to cook or you just love to eat, odds are you have a 
+            collection of dishes and recipes you'd like to try. Maybe you have a 
+            bunch handed down from a loved one. In either case, you probably need a 
+            better method to keep them organized for the long haul than a bunch of 
+            index cards in a file folder.
+        </p>
+
+        <p>
+            Here is Yummy Recipe App for you, depending on the kind of recipe collection you have.
+        </p>
+        </div>
+        <div class="col">
+
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+            
+            <li class="nav-item">
+                <a class="nav-link active" id="signup-tab" data-toggle="tab" href="#signup" role="tab" aria-controls="signup">SIGN UP</a>
+            </li>
+            
+            </ul>
+            <!--Tab content -->
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="signup" role="tabpanel" aria-labelledby="signup-tab">
+                    
+                    <div class="container">
+                    <p style="padding: 0.5;"></p>
+                    <h3>CREATE ACCOUNT</h3>
+                    <hr>
+
+                    <form action="{{ url_for('signup') }}" method="post">
+                        <div class="form-group row">
+                            <label for="firstname" class="col-md-4 col-form-label">First Name</label>
+                            <div class="col-md-8">
+                            <input type="text" id="firstname" class="form-control" placeholder="First Name">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="lastname" class="col-md-4 col-form-label">Last Name</label>
+                            <div class="col-md-8">
+                            <input type="text" id="lastname" class="form-control" placeholder="Last Name">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="email" class="col-md-4 col-form-label">Email</label>
+                            <div class="col-md-8">
+                            <input type="email" id="email" class="form-control" placeholder="Email">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="password" class="col-md-4 col-form-label">Password</label>
+                            <div class="col-md-8">
+                            <input type="password" id="password" class="form-control" placeholder="Password">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-10">
+                            <button type="submit" class="btn btn-primary">Sign up</button>
+                            </div>
+                        </div>
+
+                        <a href="{{ url_for('index') }}">ALREADY A MEMBER! SIGN IN <i class="fa fa-arrow-right"></i></a>
+
+                    </form>
+                    </div>
+
+                </div>
+
+            </div><!--End Tab content -->
+
+        </div>
+    </div>
+
+{% endblock %}
