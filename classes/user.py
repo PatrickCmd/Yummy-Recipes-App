@@ -23,5 +23,10 @@ class User(object):
              self.recipe_categories if existing_category.name == \
                recipe_category.name]:
             return False
-
         self.recipe_categories.append(recipe_category)
+        return True
+    
+    def get_recipe_categories(self):
+        """Returns user recipe categories"""
+        return self.recipe_categories
+        
