@@ -26,6 +26,21 @@
         </div>
         <div class="col">
 
+            {% if 'logged_in' in session %}
+            <div class="card bg-dark text-white">
+                <img class="card-img" src="{{ url_for('static', filename='assets/img/chicken_recipe.jpg') }}" alt="Card image">
+                <div class="card-img-overlay">
+                    <h3 class="card-title">Recipes by Category</h3>
+                    <p class="card-text">
+                        Whether you’re looking for a recipe for right now or 
+                        something special for later, find the recipe category 
+                        you’re looking for and get started.
+                    </p>
+                    <a href="{{ url_for('dashboard') }}" class="btn btn-primary">Go to Dashboard</a>
+                </div>
+                </div>
+            {% else %}
+
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item">
                     <a class="nav-link active" id="signin-tab" data-toggle="tab" href="#signin" role="tab" aria-controls="signin" aria-expanded="true">SIGN IN</a>
@@ -38,6 +53,17 @@
                     
                     <div class="container">
                         <p style="padding: 0.5;"></p>
+
+                        <!-- Messages -->
+                            {% include 'messages.html' %}
+                        <!-- end messages -->
+
+                        <!-- errors -->
+                        {% if error %}
+                            <div class="alert alert-danger">{{ error }}</div>
+                        {% endif %}
+                        <!-- errors -->
+
                         <h3>LOGIN</h3>
                         <hr>
 
@@ -45,13 +71,13 @@
                             <div class="form-group row">
                                 <label for="email" class="col-md-2 col-form-label">Email</label>
                                 <div class="col-md-10">
-                                    <input type="email" id="email" class="form-control" placeholder="Email">
+                                    <input type="email" id="email" name="email" class="form-control" placeholder="Email">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="password" class="col-md-2 col-form-label">Password</label>
                                 <div class="col-md-10">
-                                    <input type="password" id="password" class="form-control" placeholder="Password">
+                                    <input type="password" id="password" name="password" class="form-control" placeholder="Password">
                                 </div>
                             </div>
 
@@ -68,6 +94,7 @@
 
                 </div>
             </div><!-- End Tab Content -->
+            {% endif %}
 
         </div>
     </div>

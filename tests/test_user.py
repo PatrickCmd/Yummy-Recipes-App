@@ -30,3 +30,6 @@ class TestUsercase(unittest.TestCase):
         self.user.create_recipe_category(self.recipe_category)
         self.recipe_category = RecipeCategory('Luwombo', 'Delicious Luwombo')
         self.assertFalse(self.user.create_recipe_category(self.recipe_category))
+
+if __name__ == '__main__':
+    unittest.main()

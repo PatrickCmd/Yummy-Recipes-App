@@ -8,9 +8,11 @@
               <p style="padding: 0.2em;"></p>
               <div class="col-12">
                  <h2>MY PROFILE</h2>
-                 <img src="{{ url_for('static', filename='assets/img/thumb.png') }}" style="border-radius:50%; width:120px;" alt=""> 
-                 <h2>WALUKAGGA</h2>
-                 <h3>PATRICK</h3>
+                 <img src="{{ url_for('static', filename='assets/img/thumb.png') }}" style="border-radius:50%; width:120px;" alt="">
+                 {% if user %} 
+                    <h2>{{ user.last_name }}</h2>
+                    <h3>{{ user.first_name }}</h3>
+                 {% endif %}
                 <hr/>
               </div>
             </div>
@@ -18,10 +20,10 @@
             <div class="row">
                 <div class="col-4">
                     <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist">
-                        <a class="nav-link active" id="v-pills-account-tab" data-toggle="pill" href="#v-pills-account" role="tab" aria-controls="v-pills-account" aria-expanded="true">
+                        <a class="nav-link" id="v-pills-account-tab" data-toggle="pill" href="#v-pills-account" role="tab" aria-controls="v-pills-account" aria-expanded="true">
                             ACCOUNT DETAILS
                         </a>
-                        <a class="nav-link" id="v-pills-recipe-tab" data-toggle="pill" href="#v-pills-recipe" role="tab" aria-controls="v-pills-recipe" aria-expanded="true">
+                        <a class="nav-link active" id="v-pills-recipe-tab" data-toggle="pill" href="#v-pills-recipe" role="tab" aria-controls="v-pills-recipe" aria-expanded="true">
                             MY RECIPES
                         </a>
                         <a class="nav-link" id="v-pills-category-tab" data-toggle="pill" href="#v-pills-category" role="tab" aria-controls="v-pills-category" aria-expanded="true">
@@ -30,12 +32,12 @@
                         <a class="nav-link" id="v-pills-recipe_add-tab" data-toggle="pill" href="#v-pills-recipe_add" role="tab" aria-controls="v-pills-recipe_add" aria-expanded="true">
                             ADD RECIPES
                         </a><br><hr>
-                        <a href="#" class="btn btn-info">SIGN OUT</a>
+                        <a href="{{ url_for('logout') }}" class="btn btn-info">SIGN OUT</a>
                     </div>
                 </div>
                 <div class="col-8">
                     <div class="tab-content" id="v-pills-tabContent">
-                        <div class="tab-pane fade show active" id="v-pills-account" role="tabpanel" aria-labelledby="v-pills-account-tab">
+                        <div class="tab-pane fade" id="v-pills-account" role="tabpanel" aria-labelledby="v-pills-account-tab">
     
                                 <h4>PERSONAL INFO</h4>
                                 <hr>
@@ -43,47 +45,74 @@
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                         <label for="firstName" class="col-form-label">First Name</label>
-                                        <input type="text" class="form-control" id="firstname" value="PATRICK" disabled>
+                                        <input type="text" class="form-control" id="firstname" value="{{ user.first_name }}" disabled>
                                         </div>
                                         <div class="form-group col-md-6">
                                         <label for="lastname" class="col-form-label">Last Name</label>
-                                        <input type="text" class="form-control" id="lastname" value="WALUKAGGA" disabled>
+                                        <input type="text" class="form-control" id="lastname" value="{{ user.last_name }}" disabled>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="email" class="col-form-label">Email</label>
-                                        <input type="email" class="form-control" id="email" value="pwalukagga@gmail.com" disabled>
+                                        <input type="email" class="form-control" id="email" value="{{ user.email }}" disabled>
                                     </div>
                                     <div class="form-group">
                                         <label for="password" class="col-form-label">Password</label>
-                                        <input type="password" class="form-control" id="password" value="pato123" disabled>
+                                        <input type="password" class="form-control" id="password" value="{{ user.password }}" disabled>
                                     </div>
                                     
                                     <a href="#" class="btn btn-primary">Update Personal Information</a>
                                 </form>
     
                         </div>
-                        <div class="tab-pane fade" id="v-pills-recipe" role="tabpanel" aria-labelledby="v-pills-recipe-tab">
-    
-                            <h4>RECIPES</h4>
+                        <div class="tab-pane fade show active" id="v-pills-recipe" role="tabpanel" aria-labelledby="v-pills-recipe-tab">
+                            
+                            <!-- Messages -->
+                                {% include 'messages.html' %}
+                            <!-- end messages -->
+
+                            <h4>RECIPES(BY CATEGORY)</h4>
                             <hr>
-                            <div class="alert alert-warning">
-                                You do not have any recipes added yet!
-                            </div>
+
+                            <!--Recipe categories-->
+                            {% if categories %}
+                                <div class="row">
+                                    {% for category in categories %}
+                                        <div class="col">
+                                            <div class="card" style="width: 20rem;">
+                                                <img class="card-img-top" src="{{ url_for('static', filename='assets/img/vegetable-risotto.jpg') }}" alt="Vegetable Risotto">
+                                                <div class="card-body">
+                                                    <h4 class="card-title">{{ category.name|e }}</h4>
+                                                    <p class="card-text">{{ category.description | truncate(70) }}</p>
+                                                    
+                                                    <div class="alert alert-warning">
+                                                        No recipes added yet!
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                <div class="alert alert-warning">
+                                    You do not have any recipes added yet!
+                                </div>
+                            {% endif %}
+
                         </div>
                         <div class="tab-pane fade" id="v-pills-category" role="tabpanel" aria-labelledby="v-pills-category-tab">
     
                             <h4>RECIPE CATEGORY</h4>
                             <hr>
-                            <form>
+                            <form action="{{ url_for('dashboard') }}" method="POST">
                                 <div class="form-group">
                                     <label for="category_name">Name</label>
-                                    <input type="text" class="form-control" id="category_name" placeholder="Recipe Category">
+                                    <input type="text" class="form-control" name="category_name" id="category_name" placeholder="Recipe Category">
                                 </div>
                                 
                                 <div class="form-group">
                                     <label for="description">Description</label>
-                                    <textarea class="form-control" id="description" rows="3"></textarea>
+                                    <textarea class="form-control" name="description" id="description" rows="3"></textarea>
                                 </div>
     
                                 <button type="submit" class="btn btn-primary">Create</button>
@@ -94,7 +123,7 @@
                             <h4>RECIPES IN CATEGORIES</h4>
                             <hr>
                             <div class="alert alert-warning">
-                                You do not have any recipe categories added yet!
+                                You do not have any recipes added yet!
                             </div>
                         </div>
                     </div>
