@@ -12,7 +12,6 @@ class App(object):
             args:
                 user->user object
         """
-        
         # check if user already exists
         if [existing_user for existing_user in self.app_users 
              if existing_user.email == user.email]:
@@ -35,9 +34,9 @@ class App(object):
                 True if user exists
                 False if user does not exist or user creditials are wrong
         """
-        
-        if [existing_user for existing_user in self.app_users 
-            if existing_user.email == user.email and 
-              existing_user.password == user.password]:
-            return True
+        exist_user = [existing_user for existing_user in self.app_users 
+                        if existing_user.email == user.email and 
+                           existing_user.password == user.password]
+        if exist_user:
+            return exist_user[0].id
         return False
