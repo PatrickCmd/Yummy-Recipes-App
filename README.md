@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/PatrickCmd/Yummy-Recipes-App.svg?branch=master)](https://travis-ci.org/PatrickCmd/Yummy-Recipes-App)
 # Yummy-Recipes-App
 Yummy recipes app is an application that allows users  to create, save and share meeting the needs of keeping track of awesome food recipes.
 
