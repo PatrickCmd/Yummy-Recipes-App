@@ -51,3 +51,5 @@ class FlaskTestCase(unittest.TestCase):
         )
         self.assertIn(b'MY PROFILE', response_in.data)
 
+if __name__ == '__main__':
+    unittest.main()
