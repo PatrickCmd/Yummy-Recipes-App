@@ -22,10 +22,16 @@ $ virtualenv env
 $ source/env/bin/activate
 ```
 Then install all the necessary dependencies
-`pip install -r requirements.txt`
+```
+pip install -r requirements.txt
+```
 
 ## Run the application
 At the terminal or console type
-`python run.py`
+```
+python run.py
+```
 To run tests run this command at the console/terminal
-`nosetests`
+```
+nosetests
+```
