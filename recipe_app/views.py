@@ -79,7 +79,7 @@ def dashboard():
         return redirect(url_for('dashboard'))
 
     # getting user details    
-    user_found = [user for user in recipe_app.app_users 
+    user_found = [user for user in recipe_app.users 
                    if user.id == session['id']]
     current_user = user_found[0]
     recipe_categories = current_user.get_recipe_categories()
