@@ -4,7 +4,7 @@ class App(object):
     """create user object and sign in user"""
 
     def __init__(self):
-        self.app_users = []
+        self.users = []
     
     def signup_user(self, user):
         """creates user for the application
@@ -13,16 +13,16 @@ class App(object):
                 user->user object
         """
         # check if user already exists
-        if [existing_user for existing_user in self.app_users 
+        if [existing_user for existing_user in self.users 
              if existing_user.email == user.email]:
             return False
 
-        if self.app_users:
-            id = self.app_users[len(self.app_users) - 1].id + 1
+        if self.users:
+            id = self.users[len(self.users) - 1].id + 1
             user.id = id
         else:
             user.id = 1
-        self.app_users.append(user)
+        self.users.append(user)
         return user.id
 
     def signin_user(self, user):
@@ -34,7 +34,7 @@ class App(object):
                 True if user exists
                 False if user does not exist or user creditials are wrong
         """
-        exist_user = [existing_user for existing_user in self.app_users 
+        exist_user = [existing_user for existing_user in self.users 
                         if existing_user.email == user.email and 
                            existing_user.password == user.password]
         if exist_user:

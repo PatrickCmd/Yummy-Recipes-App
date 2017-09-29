@@ -39,7 +39,7 @@ class User(object):
         """
         category = [category for category in self.recipe_categories 
                     if category.name == recipe_category_name]
-        return category[0].description
+        return category[0]
 
     def edit_recipe_category(self, old_recipe_category_name, 
                               new_recipe_category_name, 
@@ -49,6 +49,90 @@ class User(object):
             args:
                 old_recipe_category_name-> name object of recipe category \
                 to be updated
-                new_recipe_category_name
+                new_recipe_category_name-> name of new recipe category
+                new_recipe_desc-> name of new recipe description
+        """
+        category = [category for category in self.recipe_categories 
+                    if category.name == old_recipe_category_name]
+        category[0].name = new_recipe_category_name
+        category[0].description = new_recipe_category_desc
+        return category
+
+    def delete_recipe_category(self, recipe_category_name):
+        """Deletes recipe category
+
+            args:
+                recipe_category_name->name of object to be deleted
+        """
+        category = [category for category in self.recipe_categories 
+                    if category.name == recipe_category_name]
+        category = category[0]
+        self.recipe_categories.remove(category)
+        return True
+    
+    def add_recipe(self, recipecategory, recipe):
+        """Adds recipe to recipe category
+
+            args:
+                recipecategory->recipe category object
+                recipe->object of recipe to be added to category
+        """
+        if [existing_recipe for existing_recipe in 
+            recipecategory.recipes if existing_recipe.name ==  
+             recipe.name]:
+            return False
+        recipecategory.recipes.append(recipe)
+        return True 
+
+    def get_recipes_from_category(self, recipecategory):
+        """Get recipes in recipe category
+
+            args:
+                recipecategory->recipe category object
+            Returns:
+                A list of recipes in recipe category
+        """
+        return recipecategory.recipes
+
+    def get_single_recipe_from_category(self, recipecategory, 
+                                         recipe_name):
+        """Get single recipe in recipe category
+
+            args:
+                recipecategory->recipe category object
+                recipe_name->name of recipe in category
+            Returns:
+                A single recipe in recipe category
+        """
+        recipe = [existing_recipe for existing_recipe in 
+                   recipecategory.recipes if existing_recipe.name ==  
+                   recipe_name]
+        return recipe[0]
+
+    def edit_recipe_in_category(self, recipecategory, old_recipe_name, 
+                                new_recipe_name, new_recipe_description):
+        """Get single recipe in recipe category
+
+            args:
+                recipecategory->recipe category object
+                recipe_name->name of recipe in category
+            Returns:
+                A single recipe in recipe category
         """
         pass
+
+    def delete_recipe_from_category(self, recipecategory, 
+                                    recipe_name):
+        """Get single recipe in recipe category
+
+            args:
+                recipecategory->recipe category object
+                recipe_name->name of recipe in category
+            Returns:
+                A single recipe in recipe category
+        """
+        recipe = [existing_recipe for existing_recipe in 
+                   recipecategory.recipes if existing_recipe.name ==  
+                   recipe_name]
+        recipecategory.recipes.remove(recipe[0])
+        return True

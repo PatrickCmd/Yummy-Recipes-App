@@ -12,13 +12,13 @@ class TestAppCase(unittest.TestCase):
     
     def test_signup_user_is_created(self):
         self.app.signup_user(self.user)
-        self.assertEqual(len(self.app.app_users), 1)
-        index = len(self.app.app_users) -1
-        self.assertEqual(self.app.app_users[index].email, 
+        self.assertEqual(len(self.app.users), 1)
+        index = len(self.app.users) -1
+        self.assertEqual(self.app.users[index].email, 
                          'pwalukagga@gmail.com')
-        self.assertEqual(self.app.app_users[index].password, 'pato123')
-        self.assertEqual(self.app.app_users[index].first_name, 'Patrick')
-        self.assertEqual(self.app.app_users[index].last_name, 'Walukagga')
+        self.assertEqual(self.app.users[index].password, 'pato123')
+        self.assertEqual(self.app.users[index].first_name, 'Patrick')
+        self.assertEqual(self.app.users[index].last_name, 'Walukagga')
     
     def test_signup_user_with_same_email_already_exists(self):
         self.app.signup_user(self.user)
@@ -28,15 +28,15 @@ class TestAppCase(unittest.TestCase):
     
     def test_signup_user_returns_correct_id(self):
         self.app.signup_user(self.user)
-        self.assertEqual(len(self.app.app_users), 1)
+        self.assertEqual(len(self.app.users), 1)
         self.user = User('henry@gmail.com', 'henry123', 'Henry', 
                           'Kato')
         self.app.signup_user(self.user)
-        self.assertEqual(len(self.app.app_users), 2)
+        self.assertEqual(len(self.app.users), 2)
         self.user = User('henry@ymail.com', 'henry0009', 'Henry', 
                           'Mutunji')
         self.app.signup_user(self.user)
-        self.assertEqual(len(self.app.app_users), 3)
+        self.assertEqual(len(self.app.users), 3)
     
     def test_signin_user_logins_successfully(self):
         self.app.signup_user(self.user)
