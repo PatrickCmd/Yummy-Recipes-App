@@ -29,4 +29,26 @@ class User(object):
     def get_recipe_categories(self):
         """Returns user recipe categories"""
         return self.recipe_categories
-        
+    
+    def get_single_category(self, recipe_category_name):
+        """Return single recipe category
+
+            args:
+                recipe_category_name->name ofobject of recipe \ 
+                category to be returned
+        """
+        category = [category for category in self.recipe_categories 
+                    if category.name == recipe_category_name]
+        return category[0].description
+
+    def edit_recipe_category(self, old_recipe_category_name, 
+                              new_recipe_category_name, 
+                              new_recipe_category_desc):
+        """Updates recipe category object
+
+            args:
+                old_recipe_category_name-> name object of recipe category \
+                to be updated
+                new_recipe_category_name
+        """
+        pass

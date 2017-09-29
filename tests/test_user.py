@@ -30,6 +30,28 @@ class TestUsercase(unittest.TestCase):
         self.user.create_recipe_category(self.recipe_category)
         self.recipe_category = RecipeCategory('Luwombo', 'Delicious Luwombo')
         self.assertFalse(self.user.create_recipe_category(self.recipe_category))
+    
+    def test_get_recipe_caategories(self):
+        self.user.create_recipe_category(self.recipe_category)
+        self.recipe_category = RecipeCategory('Chicken Vegetables', 
+                                               'Delicious Luwombo')
+        self.user.create_recipe_category(self.recipe_category)
+        self.assertEqual(len(self.user.get_recipe_categories()), 2)
+
+    def test_get_single_recipe_category(self):
+        self.user.create_recipe_category(self.recipe_category)
+        self.recipe_category = RecipeCategory('Chicken Vegetables', 
+                                               'Delicious Luwombo')
+        self.assertEqual(self.user.get_single_category('Luwombo'), 
+                                             'Delicious Luwombo')
+    
+    def test_edit_recipe_category(self):
+        self.recipe_category = RecipeCategory('Chicken Vegetables', 
+                                               'Delicious Luwombo')
+        self.user.edit_recipe_category('Chicken Vegetables',
+                                        'Chicken Sandwich', 
+                                        'Sweet')
+        
 
 if __name__ == '__main__':
     unittest.main()
