@@ -119,7 +119,12 @@ class User(object):
             Returns:
                 A single recipe in recipe category
         """
-        pass
+        recipe = [existing_recipe for existing_recipe in 
+                   recipecategory.recipes if existing_recipe.name ==  
+                   old_recipe_name]
+        recipe[0].name = new_recipe_name
+        recipe[0].description = new_recipe_description
+        return True
 
     def delete_recipe_from_category(self, recipecategory, 
                                     recipe_name):

@@ -113,7 +113,21 @@ class TestUsercase(unittest.TestCase):
                           self.recipe_category, 'Chicken Luwombo'
                           ).description, 
                           'Spectacular local source food')
-        
+
+    def test_edit_recipe_in_category(self):
+        self.user.create_recipe_category(self.recipe_category)
+        self.user.add_recipe(self.recipe_category, self.recipe)
+        self.assertEqual(len(self.recipe_category.recipes), 1)
+        self.recipe = Recipe('Chicken Luwombo', 
+                              'Spectacular local source food')
+        self.user.add_recipe(self.recipe_category, self.recipe)
+        self.user.edit_recipe_in_category(self.recipe_category,
+                                           'Chicken Luwombo',
+                                           'Chicken Recipe Luwombo', 
+                              'Spectacular Recipe local source food')
+        self.assertEqual(self.recipe_category.recipes[1].name, 
+                          'Chicken Recipe Luwombo')
+                
     
     def test_delete_recipe_from_category(self):
         self.user.create_recipe_category(self.recipe_category)
