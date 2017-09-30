@@ -9,5 +9,5 @@ install:
 script:
   - nosetests --with-coverage
 # command for coverage reporting
-after success:
+after_success:
   - coveralls 
