@@ -8,6 +8,6 @@ install:
 # command to run tests
 script:
   - nosetests --with-coverage
-
+# command for coverage reporting
 after success:
   - coveralls 
