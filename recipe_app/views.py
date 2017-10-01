@@ -3,10 +3,11 @@ from flask import redirect, render_template, url_for, session, flash, \
 
 from recipe_app import app
 
-# import cl;ass objects
+# import class objects
 from classes.app import App
 from classes.user import User
 from classes.recipe_category import RecipeCategory
+from classes.recipe import Recipe
 
 # creating App object
 recipe_app = App()
@@ -14,6 +15,7 @@ recipe_app = App()
 # Global user objects
 current_user = None
 recipes_category = None
+recipe = None
 
 # index route
 @app.route('/', methods=['GET', 'POST'])
@@ -86,6 +88,78 @@ def dashboard():
     return render_template('dashboard.html', title='Dashboard', 
                             user = current_user, 
                             categories = recipe_categories)
+
+# single recipe category view
+@app.route('/recipe_category/<categoryname>')
+def recipe_category(categoryname):
+    """Renders template for single recipe category
+
+        args:
+            name->Recipe category name
+    """
+    user = [user for user in recipe_app.users 
+             if user.id == session['id']]
+    recipecategory = user[0].get_single_category(categoryname)
+    
+    return render_template('single_category.html', 
+                            category=recipecategory, 
+                            name=categoryname)
+
+# edit recipe category view
+@app.route('/edit_recipe_category/<categoryname>', methods=['POST'])
+def edit_recipe_category(categoryname):
+    """Edits recipe category 
+
+       args:
+            categoryname->name of category to be edited
+    """
+    user = [user for user in recipe_app.users 
+             if user.id == session['id']]
+    if request.method == 'POST':
+        category_name = request.form['category_name']
+        description = request.form['description']
+    edited_category = user[0].edit_recipe_category(categoryname, 
+                                                    category_name,
+                                                    description)
+    flash('Category has been updated', 'success')
+    return redirect(url_for('recipe_category', 
+                              categoryname=edited_category[0].name))
+    
+
+# delete recipe category view
+@app.route('/delete_recipe_category/<categoryname>')
+def delete_recipe_category(categoryname):
+    """Deletes recipe category 
+
+       args:
+            categoryname->name of category to be deleted 
+    """
+    user = [user for user in recipe_app.users 
+             if user.id == session['id']]
+    if user[0].delete_recipe_category(categoryname):
+        flash("You have delete recipe category", "danger")
+    return redirect(url_for('dashboard'))
+
+# Add recipe into category
+@app.route('/add_recipe', methods=['POST'])
+def add_recipe():
+    """Add recipes to recipe category"""
+
+    if request.method == 'POST':
+        category_name = request.form['category_name']
+        recipe_name = request.form['recipe_name']
+        ingredients = request.form['ingredients']
+        description = request.form['description']
+
+        user = [user for user in recipe_app.users 
+                if user.id == session['id']]
+        
+        category = user[0].get_single_category(category_name)
+        recipe = Recipe(recipe_name, description, ingredients)
+        if user[0].add_recipe(category, recipe):
+            return redirect(url_for('recipe_category', 
+                                     categoryname=category_name))        
+
 
 # signup view
 @app.route('/signup', methods=['GET', 'POST'])
