@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <div class="row">
+        <p style="padding: 0.2em;"></p>
+        <div class="col-12">
+            <div class="card md-3">
+                <img class="card-img-top" src="{{ url_for('static', filename='assets/img/chicken_recipe.jpg') }}" width="10" alt="">
+                <div class="card-body">
+                    <!-- Messages -->
+                    {% include 'messages.html' %}
+                    <!-- end messages -->
+                    {% if category %}
+                        <h3 class="card-title"><strong>{{ category.name }}</strong></h3>
+                        <p class="card-text">{{ category.description }}</p>
+                    {% endif %}
+
+                    {% if category.recipes %}
+                        <h4>Recipes</h4>
+                        <ul class="list-group list-group-flush">
+                            {% for recipe in category.recipes %}
+                                <li class="list-group-item">{{ loop.index }}. <a href="#">{{ recipe.name }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <div class="alert alert-warning">
+                            No recipes in this category
+                        </div>    
+                    {% endif %}
+
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editCategoryModal">
+                        EDIT CATEGORY
+                    </button>
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteCategoryModal">
+                        DELETE CATEGORY
+                    </button>
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#recipeModal">
+                        ADD RECIPE
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    {% include 'modals.html' %}
+
+{% endblock %}
