@@ -83,12 +83,10 @@
                                                     <h4 class="card-title">{{ category.name|e }}</h4>
                                                     <p class="card-text">{{ category.description | truncate(30) }}</p>
                                                     
-                                                    <div class="alert alert-warning">
-                                                        No recipes added yet!
-                                                    </div>
-
-                                                    <a href="#" class="btn btn-success">Read More</a>
-                                                    <a href="#" class="btn btn-primary">Add Recipe</a>
+                                                    <button class="btn">
+                                                        Recipes <span class="badge badge-secondary">{{ category.recipes|length }}</span>
+                                                    </button>
+                                                    <a href="{{ url_for('recipe_category', categoryname=category.name) }}" class="btn btn-success">Read More</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -96,7 +94,7 @@
                                 </div>
                             {% else %}
                                 <div class="alert alert-warning">
-                                    You do not have any recipes added yet!
+                                    You do not have any recipe categories added yet!
                                 </div>
                             {% endif %}
 
