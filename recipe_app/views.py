@@ -123,7 +123,7 @@ def edit_recipe_category(categoryname):
                                                     description)
     flash('Category has been updated', 'success')
     return redirect(url_for('recipe_category', 
-                              categoryname=edited_category[0].name))
+                            categoryname=edited_category[0].name))
     
 
 # delete recipe category view
@@ -160,6 +160,21 @@ def add_recipe():
             return redirect(url_for('recipe_category', 
                                      categoryname=category_name))        
 
+# get single recipe view
+@app.route('/recipe/<recipename>')
+def get_recipe(recipename):
+    """Returns single recipe
+
+       args:
+            recipename->name of recipe item
+    """
+    user = [user for user in recipe_app.users 
+             if user.id == session['id']]
+    category = [category for category in user[0].recipe_categories 
+                 if user[0].recipe_categories.id == session['id']]
+    recipe = user[0].get_single_recipe_from_category[category[0], 
+                                                     recipename]
+    return render_template('recipe.html', recipe=recipe)
 
 # signup view
 @app.route('/signup', methods=['GET', 'POST'])
