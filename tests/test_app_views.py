@@ -98,6 +98,26 @@ class FlaskTestCase(unittest.TestCase):
         )
         self.assertIn(b'You have successfully added recipe category', 
                        response.data)
+    
+    # user edits recipe category
+    def test_edit_recipe_category(self):
+        response_up = self.tester.post(
+            '/signup', 
+            data = dict(email='pwalukagga@gmail.com', 
+                         password='pato123', 
+                         firstname='Patrick',
+                         lastname='Walukagga')
+            )
+        response_in = self.tester.post(
+            '/index', data = dict(email='pwalukagga@gmail.com', 
+                         password='pato123')
+        )
+        response = self.tester.post(
+            '/dashboard',
+            data = dict(category_name='Dinner', 
+                        description='How to make dinner recipes'),
+            follow_redirects=True
+        )
 
 if __name__ == '__main__':
     unittest.main()

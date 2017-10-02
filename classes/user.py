@@ -110,7 +110,9 @@ class User(object):
         return recipe[0]
 
     def edit_recipe_in_category(self, recipecategory, old_recipe_name, 
-                                new_recipe_name, new_recipe_description):
+                                new_recipe_name,  
+                                new_recipe_description, 
+                                new_ingredients):
         """Get single recipe in recipe category
 
             args:
@@ -124,6 +126,7 @@ class User(object):
                    old_recipe_name]
         recipe[0].name = new_recipe_name
         recipe[0].description = new_recipe_description
+        recipe[0].ingredients = new_ingredients
         return True
 
     def delete_recipe_from_category(self, recipecategory, 

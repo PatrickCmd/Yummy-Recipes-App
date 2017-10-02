@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <div class="row">
+        <p style="padding: 0.2em;"></p>
+        <div class="col-12">
+            <div class="card md-3">
+                <img class="card-img-top" src="{{ url_for('static', filename='assets/img/chicken_recipe.jpg') }}" width="10" alt="">
+                <div class="card-body">
+                    <!-- Messages -->
+                    {% include 'messages.html' %}
+                    <!-- end messages -->
+                    {% if recipe %}
+                        <h3 class="card-title"><strong>{{ recipe.name }}</strong></h3>
+                        <div class="row">
+                            <div class="col">
+                                <h5><strong>Ingredients</strong></h5>
+                                <hr>
+                                {% set ingredients = recipe.ingredients.split(',') %}
+                                {% for ingredient in ingredients %}
+                                    <p>{{ loop.index }}. {{ ingredient }}</p>
+                                {% endfor %}
+                            </div>
+                            <div class="col">
+                                <h5><strong>How to make it</strong></h5>
+                                <hr>
+                                {% set steps = recipe.description.split('\n') %}
+                                {% for step in steps %}
+                                    <p>{{ loop.index }}. {{ step }}</p>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editRecipeModal">
+                        EDIT RECIPE
+                    </button>
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteRecipeModal">
+                        DELETE RECIPE
+                    </button>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    {% include 'recipe_modals.html' %}
+
+{% endblock %}
