@@ -171,10 +171,55 @@ def get_recipe(recipename):
     user = [user for user in recipe_app.users 
              if user.id == session['id']]
     category = [category for category in user[0].recipe_categories 
-                 if user[0].recipe_categories.id == session['id']]
-    recipe = user[0].get_single_recipe_from_category[category[0], 
-                                                     recipename]
+                 if category.user_id == session['id']]
+    recipe = user[0].get_single_recipe_from_category(category[0], 
+                                                     recipename)
     return render_template('recipe.html', recipe=recipe)
+
+# edit recipe item
+@app.route('/recipe/<recipename>', methods=['POST'])
+def edit_recipe(recipename):
+    """Returns single recipe
+
+       args:
+            recipename->name of recipe item
+    """
+    if request.method == 'POST':
+        recipe_name = request.form['recipe_name']
+        ingredients = request.form['ingredients']
+        description = request.form['description']
+
+    user = [user for user in recipe_app.users 
+             if user.id == session['id']]
+    category = [category for category in user[0].recipe_categories 
+                 if category.user_id == session['id']]
+    
+    if user[0].edit_recipe_in_category(category[0], recipename, 
+                                        recipe_name, 
+                                        description, 
+                                        ingredients):
+        flash("Recipe updated successfully", "success")
+        return redirect(url_for('recipe_category', 
+                                categoryname=category[0].name))
+    
+
+# delete recipe from category
+@app.route('/delete_recipe/<recipename>')
+def delete_recipe(recipename):
+    """Delete recipe from category
+
+        args:
+            recipename->name of recipe item
+    """
+    user = [user for user in recipe_app.users 
+             if user.id == session['id']]
+    category = [category for category in user[0].recipe_categories 
+                 if category.user_id == session['id']]
+    if user[0].delete_recipe_from_category(category[0],
+                                           recipename):
+        flash("You have deleted recipe item", "danger")
+        return redirect(url_for('recipe_category', 
+                                categoryname=category[0].name))
 
 # signup view
 @app.route('/signup', methods=['GET', 'POST'])

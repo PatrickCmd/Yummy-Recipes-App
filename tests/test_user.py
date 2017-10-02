@@ -119,12 +119,14 @@ class TestUsercase(unittest.TestCase):
         self.user.add_recipe(self.recipe_category, self.recipe)
         self.assertEqual(len(self.recipe_category.recipes), 1)
         self.recipe = Recipe('Chicken Luwombo', 
-                              'Spectacular local source food')
+                              'Spectacular local source food', 
+                              'Onions')
         self.user.add_recipe(self.recipe_category, self.recipe)
         self.user.edit_recipe_in_category(self.recipe_category,
                                            'Chicken Luwombo',
                                            'Chicken Recipe Luwombo', 
-                              'Spectacular Recipe local source food')
+                              'Spectacular Recipe local source food', 
+                              'Tomatoes')
         self.assertEqual(self.recipe_category.recipes[1].name, 
                           'Chicken Recipe Luwombo')
                 
