@@ -97,6 +97,11 @@ def recipe_category(categoryname):
         args:
             name->Recipe category name
     """
+    if 'id' not in session and 'logged_in' not in session:
+        flash('You need to login to have access to your dashboard, \
+            if not, login or checkout the link below', 'warning')
+        return redirect(url_for('index'))
+
     user = [user for user in recipe_app.users 
              if user.id == session['id']]
     recipecategory = user[0].get_single_category(categoryname)
@@ -113,6 +118,11 @@ def edit_recipe_category(categoryname):
        args:
             categoryname->name of category to be edited
     """
+    if 'id' not in session and 'logged_in' not in session:
+        flash('You need to login to have access to your dashboard, \
+            if not, login or checkout the link below', 'warning')
+        return redirect(url_for('index'))
+
     user = [user for user in recipe_app.users 
              if user.id == session['id']]
     if request.method == 'POST':
@@ -134,6 +144,11 @@ def delete_recipe_category(categoryname):
        args:
             categoryname->name of category to be deleted 
     """
+    if 'id' not in session and 'logged_in' not in session:
+        flash('You need to login to have access to your dashboard, \
+            if not, login or checkout the link below', 'warning')
+        return redirect(url_for('index'))
+
     user = [user for user in recipe_app.users 
              if user.id == session['id']]
     if user[0].delete_recipe_category(categoryname):
@@ -144,6 +159,11 @@ def delete_recipe_category(categoryname):
 @app.route('/add_recipe', methods=['POST'])
 def add_recipe():
     """Add recipes to recipe category"""
+
+    if 'id' not in session and 'logged_in' not in session:
+        flash('You need to login to have access to your dashboard, \
+            if not, login or checkout the link below', 'warning')
+        return redirect(url_for('index'))
 
     if request.method == 'POST':
         category_name = request.form['category_name']
@@ -168,6 +188,11 @@ def get_recipe(recipename):
        args:
             recipename->name of recipe item
     """
+    if 'id' not in session and 'logged_in' not in session:
+        flash('You need to login to have access to your dashboard, \
+            if not, login or checkout the link below', 'warning')
+        return redirect(url_for('index'))
+
     user = [user for user in recipe_app.users 
              if user.id == session['id']]
     category = [category for category in user[0].recipe_categories 
@@ -184,6 +209,11 @@ def edit_recipe(recipename):
        args:
             recipename->name of recipe item
     """
+    if 'id' not in session and 'logged_in' not in session:
+        flash('You need to login to have access to your dashboard, \
+            if not, login or checkout the link below', 'warning')
+        return redirect(url_for('index'))
+
     if request.method == 'POST':
         recipe_name = request.form['recipe_name']
         ingredients = request.form['ingredients']
@@ -211,6 +241,11 @@ def delete_recipe(recipename):
         args:
             recipename->name of recipe item
     """
+    if 'id' not in session and 'logged_in' not in session:
+        flash('You need to login to have access to your dashboard, \
+            if not, login or checkout the link below', 'warning')
+        return redirect(url_for('index'))
+    
     user = [user for user in recipe_app.users 
              if user.id == session['id']]
     category = [category for category in user[0].recipe_categories 
