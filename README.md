@@ -8,6 +8,12 @@ Yummy recipes app is an application that allows users  to create, save and share
 - `Signin` Enables user to login and access his/her dashboard
 - `View Account Details` Enables to view his/her account details
 - `Add Recipe category` Enables user to create his/her recipe categories
+- `Edit Recipe category` Enables user to edit recipe category
+- `Delete Recipe Category` User can delete recipe category
+- `Add Recipe in category` Enables user to add recipe in category
+- `View Recipes in categories` User can view recipes in category
+- `Edit Recipe in category`  User edits recipe in category
+- `Delete recipe in category` User deletes recipe in category
 
 ## Requirements
 `python 3.4+, python-pip, virtualenv, flask`
@@ -16,7 +22,7 @@ Yummy recipes app is an application that allows users  to create, save and share
 First clone this repository
 ```
 $ git clone https://github.com/PatrickCmd/Yummy-Recipes-App.git
-$ cd Yummy-Recipes-App.git
+$ cd Yummy-Recipes-App
 ```
 Create virtual environment and install it
 ```
