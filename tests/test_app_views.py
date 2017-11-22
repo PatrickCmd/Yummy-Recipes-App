@@ -52,6 +52,38 @@ class FlaskTestCase(unittest.TestCase):
         )
         self.assertIn(b'MY PROFILE', response_in.data)
     
+    def test_signin_user_with_wrong_email(self):
+        response_up = self.tester.post(
+            '/signup', 
+            data = dict(email='pwalukagga@gmail.com', 
+                         password='pato123', 
+                         firstname='Patrick',
+                         lastname='Walukagga')
+            )
+        # signup with wrong email
+        response_in = self.tester.post(
+            '/index', data = dict(email='pwalukagga123@gmail.com', 
+                         password='pato123'),
+            follow_redirects=True
+        )
+        self.assertIn(b'Wrong email or password combination', response_in.data)
+    
+    def test_signin_user_with_wrong_password(self):
+        response_up = self.tester.post(
+            '/signup', 
+            data = dict(email='pwalukagga@gmail.com', 
+                         password='pato123', 
+                         firstname='Patrick',
+                         lastname='Walukagga')
+            )
+        # signup with wrong password
+        response_in = self.tester.post(
+            '/index', data = dict(email='pwalukagga@gmail.com', 
+                         password='pato1234'),
+            follow_redirects=True
+        )
+        self.assertIn(b'Wrong email or password combination', response_in.data)
+    
     # dashboard loads correctly when user is logged in
     def test_dashboard(self):
         response_up = self.tester.post(
