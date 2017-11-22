@@ -42,6 +42,11 @@ class TestAppCase(unittest.TestCase):
         self.app.signup_user(self.user)
         self.user = User('pwalukagga@gmail.com', 'pato123')
         self.assertEqual(self.app.signin_user(self.user), 1)
+    
+    def test_signin_user_logins_with_wrong_email(self):
+        self.app.signup_user(self.user)
+        self.user = User('pwalukagga123@gmail.com', 'pato123')
+        self.assertFalse(self.app.signin_user(self.user))
 
     def test_signin_user_login_fails_with_wrong_email_password(self):
         self.app.signup_user(self.user)

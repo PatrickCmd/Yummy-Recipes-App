@@ -37,6 +37,7 @@ def index():
 
         # creating session
         session['id'] = recipe_app.signin_user(current_user)
+        print(session['id'])
 
         if session['id']:
             session['logged_in'] = True
