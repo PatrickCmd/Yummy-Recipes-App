@@ -132,7 +132,7 @@ class FlaskTestCase(unittest.TestCase):
                        response.data)
     
     # user edits recipe category
-    def test_edit_recipe_category(self):
+    '''def test_edit_recipe_category(self):
         response_up = self.tester.post(
             '/signup', 
             data = dict(email='pwalukagga@gmail.com', 
@@ -150,6 +150,42 @@ class FlaskTestCase(unittest.TestCase):
                         description='How to make dinner recipes'),
             follow_redirects=True
         )
+        self.assertIn(b'You have successfully added recipe category', 
+                       response.data)
+        response = self.tester.post(
+            '/edit_recipe_category/Dinner',
+            data = dict(category_name='Dinner Sweet', 
+                        description='How to make dinner sweet recipes'),
+            follow_redirects=True
+        )
+        self.assertIn(b'Category has been updated', response.data)'''
+    
+    # create recipe when notlogged in
+    def test_add_recipe_category_not_logged_in(self):
+        response = self.tester.post(
+            '/dashboard',
+            data = dict(category_name='Dinner', 
+                        description='How to make dinner recipes'),
+            follow_redirects=True
+        )
+        self.assertIn(b'You need to login to have access to your dashboard', 
+                       response.data)
+    
+    def test_edit_recipe_category_when_not_loggedin(self):
+        response = self.tester.post(
+            '/dashboard',
+            data = dict(category_name='Dinner', 
+                        description='How to make dinner recipes'),
+            follow_redirects=True
+        )
+        response = self.tester.post(
+            '/edit_recipe_category/Dinner',
+            data = dict(category_name='Dinner Sweet', 
+                        description='How to make dinner sweet recipes'),
+            follow_redirects=True
+        )
+        self.assertIn(b'You need to login to have access to your dashboard', 
+                       response.data)
 
 if __name__ == '__main__':
     unittest.main()
